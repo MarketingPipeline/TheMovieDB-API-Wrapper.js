@@ -1,3 +1,7 @@
+/* TMDB-API-Wrapper.js -
+
+*/
+
 // Regex / Name Parser For Torrents
 import tnp from "https://cdn.skypack.dev/torrent-name-parser@0.6.5";
 
@@ -71,7 +75,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
             // End Point To Send Request Too 
             let Movie_JSON = []
             let Actor_JSON = []
-
+            // Search for query name 
             fetchDetails(`https://api.themoviedb.org/3/search/${query_type}?api_key=${TheMovieDB_Wrapper_APIKey}&language=en-US&query=${name}${year}`).then(function(search_results) {
 
                 if (search_results.total_results === 0) {
@@ -99,17 +103,19 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
                     let fetchMediaInfoURL = `https://api.themoviedb.org/3/${query_type}/${MovieID}${episode_query}?&api_key=${TheMovieDB_Wrapper_APIKey}`
 
-
+                    // Search extra info about query name (endpoint includes genres etc..) 
                     fetchDetails(fetchMediaInfoURL).then(function(query_results) {
 
                         DEBUGGER(`Success - Found info for ${name} using ID: ${MovieID}`)
 
                         Movie_JSON.push(query_results)
-
+                        
+                        // Search actor / cast info about query name 
                         fetchDetails(`https://api.themoviedb.org/3/${query_type}/${MovieID}/${cast}?&api_key=${TheMovieDB_Wrapper_APIKey}`).then(function(query_results_actors) {
                             DEBUGGER(`Attempting To Find Actors For ${name}`)
                             var actor_counter = 0
                             if (!max_actors) {
+                                // Default Max Actors To Return. 
                                 max_actors = 5
                             }
                             if (query_results_actors.cast.length != 0) {
@@ -124,7 +130,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
                                 }
                             }
-                            // only here for debugging purposes... leave it. 
+                            // No actors were found!
                             else {
                                 Actor_JSON.push({
                                     "actors": null
@@ -163,7 +169,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
     });
 }
 
-// Call the wrapper
+// Function to call the wrapper
 async function FetchDataFrom_TheMovieDB(query, query_type, max_actors, season, episode) {
     const Media_Info = await TheMovieDB_Wrapper(query, query_type, max_actors, season, episode);
     return Media_Info
