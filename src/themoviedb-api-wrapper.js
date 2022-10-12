@@ -44,11 +44,20 @@ let episode_search = false
       type= "tv"
       episode_search = true
        if(!season){
-   return console.log("Error - Season Number Not Provided")
+                 if(tnp(movie_name).season){
+   season = tnp(movie_name).season
+  }  else{
+    return console.log("Error - Season Number Not Provided")
+  }
+ 
   }
       
            if(!episode){
+               if(tnp(movie_name).episode){
+   episode = tnp(movie_name).episode
+  }  else{
    return console.log("Error - Episode Number Not Provided")
+  }
   }
     }
     
@@ -154,5 +163,36 @@ async function FetchDataFrom_TheMovieDB(movie_name,  type, max_actors, season, e
   
 }
 
-FetchDataFrom_TheMovieDB("Rick And Morty", "tv", 2);
+let TheMovieDB_Wrapper_APIKey = "6b4357c41d9c606e4d7ebe2f4a8850ea"
+
+
+
+FetchDataFrom_TheMovieDB("Two and a Half Men.S05E02", "episode",  2).then(function(search_results) {
+    console.log(search_results[0][0].overview)
+  });
+
+
+FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+    console.log(search_results[0][0].overview)
+  });
+
+
+FetchDataFrom_TheMovieDB("Fast And Furious", "movie",  2).then(function(search_results) {
+  console.log(search_results)
+  });
+
+
+FetchDataFrom_TheMovieDB("Fast And Furious", "collection",  2).then(function(search_results) {
+  console.log(search_results)
+  });
+
+
+
+FetchDataFrom_TheMovieDB("Eminem", "actor",  2).then(function(search_results) {
+  console.log(search_results)
+  });
+
+
 //
+//
+///////
