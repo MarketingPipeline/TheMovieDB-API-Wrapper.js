@@ -1,32 +1,44 @@
- import tnp from "https://cdn.skypack.dev/torrent-name-parser@0.6.5";
 
-function test(movie_name,  max_actors) {
+// Regex / Name Parser For Torrents
+import tnp from "https://cdn.skypack.dev/torrent-name-parser@0.6.5";
+
+function test(movie_name,  type, max_actors) {
+  // if query was provided 
   if(movie_name !=undefined){
-    console.log(tnp(movie_name))
+   // parse results
   let name =  tnp(movie_name).title
    let year = ``
+   let cast = "cast"
+   // if year was found in query or even torrent name
   if(tnp(movie_name).year){
    year = `&year=${tnp(movie_name).year}`
   }  
     
- let FinalEndPoint = `https://api.themoviedb.org/3/search/movie?api_key=6b4357c41d9c606e4d7ebe2f4a8850ea&language=en-US&query=${name}${year}`   
+  if(type != "movie"){
+     type= "tv"
+     cast = "credits"
+  }
+  
+    // End Point To Send Request Too
+ let FinalEndPoint = `https://api.themoviedb.org/3/search/${type}?api_key=6b4357c41d9c606e4d7ebe2f4a8850ea&language=en-US&query=${name}${year}`   
  let Movie_JSON = []
     
-getDetails(FinalEndPoint).then(function(result) {
+getDetails(FinalEndPoint).then(function(search_results) {
   
-  if(result.total_results === 0){
+  if(search_results.total_results === 0){
     return console.log("No Results Found")
   } else{ 
     
-    var MovieID = result.results[0].id
+    // The Movie or TV Show ID to find more details
+ var MovieID = search_results.results[0].id
   
-var endpoint1 = `https://api.themoviedb.org/3/movie/${MovieID}?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea`  
- getDetails(endpoint1).then(function(result) {
+var endpoint1 = `https://api.themoviedb.org/3/${type}/${MovieID}?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea`  
+ getDetails(endpoint1).then(function(query_results) {
   
-   Movie_JSON.push(result)
-var posterPaths = "https://image.tmdb.org/t/p/w370_and_h556_bestv2";
-var backgroundPaths = "http://image.tmdb.org/t/p/w1280";
- getDetails(`https://api.themoviedb.org/3/movie/${MovieID}/casts?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea`).then(function(result) {
+   Movie_JSON.push(query_results)
+
+ getDetails(`https://api.themoviedb.org/3/${type}/${MovieID}/${cast}?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea`).then(function(query_results_actors) {
+ 
     var actor_counter = 0 
    if (!max_actors){
      max_actors = 5
@@ -36,7 +48,7 @@ var backgroundPaths = "http://image.tmdb.org/t/p/w1280";
 
 
       
-   Movie_JSON.push(result.cast[actor_counter])
+   Movie_JSON.push(query_results_actors.cast[actor_counter])
   actor_counter += 1
  
     }  
@@ -57,13 +69,16 @@ async function getDetails(endpoint) {
         mode: 'cors'
       })
       if (response.ok) {
+       // things went fine - returning query data! 
         const jsonResponse = await response.json();
         return jsonResponse
       } else{
+        // API error or etc..
         const jsonResponse = await response.json();
         return jsonResponse.status_message
       }
     } catch(error) {
+     // something else went wrong... 
       return error.message
     }
   }
@@ -73,4 +88,4 @@ async function getDetails(endpoint) {
 
 }
 
-test("The Matrix", 2)  //
+test("The Simpsons", "tv",  2)  //
