@@ -1,4 +1,3 @@
-
 // Regex / Name Parser For Torrents
 import tnp from "https://cdn.skypack.dev/torrent-name-parser@0.6.5";
 
@@ -23,6 +22,7 @@ function TheMovieDB_Wrapper(movie_name,  type, max_actors) {
     // End Point To Send Request Too
  let FinalEndPoint = `https://api.themoviedb.org/3/search/${type}?api_key=6b4357c41d9c606e4d7ebe2f4a8850ea&language=en-US&query=${name}${year}`   
  let Movie_JSON = []
+ let Actor_JSON = []
     
 getDetails(FinalEndPoint).then(function(search_results) {
   
@@ -50,13 +50,13 @@ var backgroundPaths = "http://image.tmdb.org/t/p/w1280";
 
 
       
-   Movie_JSON.push(query_results_actors.cast[actor_counter])
+   Actor_JSON.push(query_results_actors.cast[actor_counter])
   actor_counter += 1
  
     }  
       
  
-    resolve(Movie_JSON)
+    resolve( [Movie_JSON, Actor_JSON])
    
     });     
 });
@@ -90,8 +90,9 @@ async function getDetails(endpoint) {
   // Example Usage
 async function FetchDataFrom_TheMovieDB(movie_name,  type, max_actors) {
   const Media_Info = await TheMovieDB_Wrapper(movie_name,  type, max_actors);
-  console.log(Media_Info);
+ console.log(Media_Info[1])
   
 }
 
 FetchDataFrom_TheMovieDB("Rick And Morty", "tv",  2);
+//
