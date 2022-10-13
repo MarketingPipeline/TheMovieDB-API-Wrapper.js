@@ -71,6 +71,8 @@ When searching up a movie / film - any found media info & actor info  will be re
 
 ```js
  /// API WRAPPER USAGE EXAMPLE	
+ 
+ import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
 	
   // Valid API Key	
  var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"	
@@ -136,6 +138,9 @@ for more accurate results, a year should be provided in the query.
 
 ```js
   /// API WRAPPER USAGE EXAMPLE		
+  
+  import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  
   // Valid API Key	
  var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
 	
@@ -173,7 +178,7 @@ FetchDataFromTheMovieDB("Two and a Half Men 2003", "tv",  2).then(function(searc
 <br>	 
 <br>	 
 	
-<details><summary>How to show <b>Movie Collection</b> info:</summary>
+<details><summary>How to search <b>Movie Collection</b> info:</summary>
 
 <br>		
 	
@@ -189,6 +194,7 @@ You will require a API key from TheMovieDB and need to define a variable called 
 
 ```js
   /// API WRAPPER USAGE EXAMPLE		
+  import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
  var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"			
 FetchDataFromTheMovieDB("Fast And Furious", "collection",  2).then(function(search_results) {
@@ -206,7 +212,7 @@ FetchDataFromTheMovieDB("Fast And Furious", "collection",  2).then(function(sear
 <br>	 
 <br>	 
 	
-<details><summary>How to search up <b>Episode</b> info:</summary>
+<details><summary>How to search <b>Episode</b> info:</summary>
 	
 <br>		
 	
@@ -230,6 +236,7 @@ A episode info query could look like the following example(s)
 
 ```js
  /// API WRAPPER USAGE EXAMPLE		
+ import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
  var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
 
@@ -257,7 +264,7 @@ FetchDataFromTheMovieDB("Two and a Half Men", "episode",  2, 5, 2).then(function
 <br>	 
 <br>	 
 	
-<details><summary>How to search up <b>Actor</b> info:</summary>
+<details><summary>How to search <b>Actor</b> info:</summary>
 	
 <br>	
 	
@@ -269,7 +276,8 @@ You will require a API key from TheMovieDB and need to define a variable called 
 > Paramaters (Query [REQUIRED], Type [REQUIRED])
 
 ```js
-/// API WRAPPER USAGE EXAMPLE		
+/// API WRAPPER USAGE EXAMPLE	
+import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
  var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
 FetchDataFromTheMovieDB("Eminem", "actor").then(function(search_results) {
@@ -345,11 +353,11 @@ FetchDataFromTheMovieDB("Eminem", "actor").then(function(search_results) {
 
 ### HTML script
 
-    <script type="module" src="https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/" defer></script> 
+    <script type="module" src="https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js" defer></script> 
 
 ### Import 
 
-    import {} from https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js
+    import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js'
     
 </details>    
 
