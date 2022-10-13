@@ -7,9 +7,11 @@
 /* TO-DO
 For anybody reading this wanting to improve this script. Here are some things that could be improved or added.
 
-- [ ] Improve error handling
+- [ ] Improve error handling (throw custom error message etc and add to documenation / README.md)
 - [ ] More Routes To Search 
   - [ ] Search TV or Movie by ID
+- [ ] Clean variable names etc..   
+- [ ] Make a class for this.. 
 
 */ 
 
