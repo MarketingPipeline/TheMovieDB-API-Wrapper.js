@@ -47,8 +47,8 @@ You can view a demo of the API wrapper in use [here.](https://marketingpipeline.
 	
 <br>	
 	
-You will require a API key from TheMovieDB and need to define a variable called <code>TheMovieDB_Wrapper_APIKey</code> with your valid API key
-
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
+	
 A movie / film query name could look like the following example(s)
 
    
@@ -72,29 +72,29 @@ When searching up a movie / film - any found media info & actor info  will be re
 ```js
  /// API WRAPPER USAGE EXAMPLE	
  
- import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+ import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
 	
   // Valid API Key	
- var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"	
+ tmdb_api_key("YOUR API KEY HERE")
 
 // Auto detecting name & year # from Torrent Name
-FetchDataFromTheMovieDB("Captain America The Winter Soldier (2014) 1080p BrRip x264 - YIFY", "movie",  2).then(function(search_results) {
+fetch_tmdb_info("Captain America The Winter Soldier (2014) 1080p BrRip x264 - YIFY", "movie",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 	
 /// Both arrays (Media Info & Actors Info)
-FetchDataFromTheMovieDB("Captain America The Winter Soldier", "movie",  2).then(function(search_results) {
+fetch_tmdb_info("Captain America The Winter Soldier", "movie",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 /// Media Info Only
-FetchDataFromTheMovieDB("8 Mile (2002)", "movie",  2).then(function(search_results) {
+fetch_tmdb_info("8 Mile (2002)", "movie",  2).then(function(search_results) {
     console.log(search_results)[0]
   });  
   
 /// Actor / Cast Info Only
-FetchDataFromTheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+fetch_tmdb_info("8 Mile", "movie",  2).then(function(search_results) {
     console.log(search_results)[1]
   });    
 ```
@@ -114,8 +114,7 @@ FetchDataFromTheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
 	
 <br>		
 	
-You will require a API key from TheMovieDB and need to define a variable called <code>TheMovieDB_Wrapper_APIKey</code> with your valid API key
-	
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
 	
 ### Usage
 	 
@@ -139,29 +138,29 @@ for more accurate results, a year should be provided in the query.
 ```js
   /// API WRAPPER USAGE EXAMPLE		
   
-  import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   
   // Valid API Key	
- var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
+ tmdb_api_key("YOUR API KEY HERE")	
 	
 // Auto detecting name & year # from Torrent Name
-FetchDataFromTheMovieDB("Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]", "movie",  2).then(function(search_results) {
+fetch_tmdb_info("Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]", "movie",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 	
 /// Both arrays (Media Info & Actors Info)
-FetchDataFromTheMovieDB("Two and a Half Men", "tv",  2).then(function(search_results) {
+fetch_tmdb_info("Two and a Half Men", "tv",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 /// Media Info Only
-FetchDataFromTheMovieDB("Two and a Half Men (2003)", "tv",  2).then(function(search_results) {
+fetch_tmdb_info("Two and a Half Men (2003)", "tv",  2).then(function(search_results) {
     console.log(search_results)[0]
   });  
   
 /// Actor / Cast Info Only
-FetchDataFromTheMovieDB("Two and a Half Men 2003", "tv",  2).then(function(search_results) {
+fetch_tmdb_info("Two and a Half Men 2003", "tv",  2).then(function(search_results) {
     console.log(search_results)[1]
   });    
 ```
@@ -182,9 +181,7 @@ FetchDataFromTheMovieDB("Two and a Half Men 2003", "tv",  2).then(function(searc
 
 <br>		
 	
-You will require a API key from TheMovieDB and need to define a variable called <code>TheMovieDB_Wrapper_APIKey</code> with your valid API key
-
-
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
 	
 ### Usage
 	 
@@ -194,10 +191,10 @@ You will require a API key from TheMovieDB and need to define a variable called 
 
 ```js
   /// API WRAPPER USAGE EXAMPLE		
-  import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
- var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"			
-FetchDataFromTheMovieDB("Fast And Furious", "collection",  2).then(function(search_results) {
+ tmdb_api_key("YOUR API KEY HERE")		
+fetch_tmdb_info("Fast And Furious", "collection",  2).then(function(search_results) {
   console.log(search_results)
   });
 ```
@@ -216,7 +213,7 @@ FetchDataFromTheMovieDB("Fast And Furious", "collection",  2).then(function(sear
 	
 <br>		
 	
-You will require a API key from TheMovieDB and need to define a variable called <code>TheMovieDB_Wrapper_APIKey</code> with your valid API key
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
 	
 
 	
@@ -236,17 +233,17 @@ A episode info query could look like the following example(s)
 
 ```js
  /// API WRAPPER USAGE EXAMPLE		
- import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+ import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
- var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
+ tmdb_api_key("YOUR API KEY HERE")	
 
 // Auto detecting season & episode # from Torrent Name
-FetchDataFromTheMovieDB("Two and a Half Men.S05E02", "episode",  2).then(function(search_results) {
+fetch_tmdb_info("Two and a Half Men.S05E02", "episode",  2).then(function(search_results) {
     console.log(search_results)
   });
 	
 // Regular Name (with season and episodes as paramaters) 
-FetchDataFromTheMovieDB("Two and a Half Men", "episode",  2, 5, 2).then(function(search_results) {
+fetch_tmdb_info("Two and a Half Men", "episode",  2, 5, 2).then(function(search_results) {
     console.log(search_results)
   });	
 	
@@ -268,7 +265,7 @@ FetchDataFromTheMovieDB("Two and a Half Men", "episode",  2, 5, 2).then(function
 	
 <br>	
 	
-You will require a API key from TheMovieDB and need to define a variable called <code>TheMovieDB_Wrapper_APIKey</code> with your valid API key	
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
 	
 ### Usage
 	 
@@ -277,10 +274,10 @@ You will require a API key from TheMovieDB and need to define a variable called 
 
 ```js
 /// API WRAPPER USAGE EXAMPLE	
-import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
   // Valid API Key	
- var TheMovieDB_Wrapper_APIKey = "YOUR API KEY HERE"		
-FetchDataFromTheMovieDB("Eminem", "actor").then(function(search_results) {
+ tmdb_api_key("YOUR API KEY HERE")	
+fetch_tmdb_info("Eminem", "actor").then(function(search_results) {
   console.log(search_results)
   });
 ```
@@ -357,7 +354,7 @@ FetchDataFromTheMovieDB("Eminem", "actor").then(function(search_results) {
 
 ### Import 
 
-    import {FetchDataFromTheMovieDB} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js'
+    import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js'
     
 </details>    
 
