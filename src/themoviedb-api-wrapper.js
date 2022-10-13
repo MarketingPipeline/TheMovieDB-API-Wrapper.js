@@ -6,15 +6,11 @@
 
 /* TO-DO
 For anybody reading this wanting to improve this script. Here are some things that could be improved or added.
-
-- [ ] Improve error handling (throw custom error message etc and add to documenation / README.md)
 - [ ] More Routes To Search 
   - [ ] Search TV or Movie by ID
 - [ ] Clean variable names etc..   
 - [ ] Make a class for this.. 
-
 */ 
-
 
 
 // Regex / Name Parser For Torrents
@@ -39,13 +35,25 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
     return new Promise(resolve => {
 
+        // function to return error messages 
+        function setErrorMsg(msg){
+          let error = {"tmdb_api_error" : msg}
+          return error
+        }
+      
         if (TheMovieDB_Wrapper_APIKey === null) {
-            return console.log("Error - TheMovieDB API Key Not Provided")
+           DEBUGGER("Error -  TheMovieDB API Key Not Provided")
+          return resolve(setErrorMsg("TheMovieDB API Key Not Provided"))
         }
         if (!query) {
-            return console.log("Error - Query Name Not Provided")
+          DEBUGGER("Error -  Query Name Not Provided")
+          return resolve(setErrorMsg("Query Name Not Provided"))
         }
-
+         
+              if (!query_type) {
+          DEBUGGER("Error -  Query Type Not Provided")
+          return resolve(setErrorMsg("Query Type Not Provided"))
+        }
 
         if (query != undefined) {
             // parse results
@@ -73,7 +81,8 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                     if (tnp(query).season) {
                         season = tnp(query).season
                     } else {
-                        return console.log("Error - Season Number Not Provided or Found")
+                        DEBUGGER("Error - Season Number Not Provided or Found")
+                     return resolve(setErrorMsg("Season Number Not Provided or Found"))
                     }
 
                 }
@@ -82,7 +91,8 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                     if (tnp(query).episode) {
                         episode = tnp(query).episode
                     } else {
-                        return console.log("Error - Episode Number Not Provided or Found")
+                    DEBUGGER("Error - Episode Number Not Provided or Found")
+                    return  resolve(setErrorMsg("Episode Number Not Provided or Found"))
                     }
                 }
             }
@@ -96,7 +106,8 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
             fetchDetails(`https://api.themoviedb.org/3/search/${query_type}?api_key=${TheMovieDB_Wrapper_APIKey}&language=en-US&query=${name}${year}`).then(function(search_results) {
 
                 if (search_results.total_results === 0) {
-                    return console.log("No Results Found")
+                    DEBUGGER(`No results found for ${query}`)
+                    return resolve(setErrorMsg("No results found"))
                 } else {
 
 
@@ -154,7 +165,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                                 })
                                 DEBUGGER(`No Actors / Cast Were Found For ${name}`)
                             }
-                            resolve([Movie_JSON, Actor_JSON])
+                            return resolve([Movie_JSON, Actor_JSON])
 
                         });
 
@@ -175,11 +186,13 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                         return jsonResponse
                     } else { // API Key Error etc. 
                         const jsonResponse = await response.json();
-                        resolve(jsonResponse.status_message)
+                        DEBUGGER(`Error - ${jsonResponse.status_message}`)
+                    return resolve(setErrorMsg(jsonResponse.status_message))
                     }
                 } catch (error) {
                     // something else went wrong... 
-                    resolve(error.message)
+                    DEBUGGER(`Error - ${error.message}`)
+                    return resolve(setErrorMsg(error.message))
                 }
             }
         }
