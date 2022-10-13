@@ -170,7 +170,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 }
 
 // Function to call the wrapper
-async function FetchDataFrom_TheMovieDB(query, query_type, max_actors, season, episode) {
+export async function FetchDataFromTheMovieDB(query, query_type, max_actors, season, episode) {
     const Media_Info = await TheMovieDB_Wrapper(query, query_type, max_actors, season, episode);
     return Media_Info
 
