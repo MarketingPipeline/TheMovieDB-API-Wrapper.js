@@ -185,11 +185,13 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 }
 
 
-export async function TheMovieDB_Wrapper_Key(key) {
+// Function to set API key
+export function tmdb_api_key(key) {
   TheMovieDB_Wrapper_APIKey = key
 }
+
 // Function to call the wrapper
-export async function FetchDataFromTheMovieDB(query, query_type, max_actors, season, episode) {
+export async function fetch_tmdb_info(query, query_type, max_actors, season, episode) {
     const Media_Info = await TheMovieDB_Wrapper(query, query_type, max_actors, season, episode);
     return Media_Info
 
