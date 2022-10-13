@@ -1,0 +1,22 @@
+<script type="module">
+import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/test3.js' 
+
+tmdb_api_key("6b4357c41d9c606e4d7ebe2f4a8850ea")
+
+function SearchInput(input){
+fetch_tmdb_info(input, "tv",  6).then(function(search_results) {
+    document.body.innerHTML = search_results[0][0].overview
+   console.log(search_results[1])
+  });
+}
+
+const button = document.querySelector('button');
+
+button.addEventListener('click', (event) => {
+  SearchInput(document.querySelector('input').value)
+});
+
+</script>
+            <input type="search" name="search" placeholder="search your book here for..">
+            <button type="submit">Search</button>
+            //
