@@ -1,6 +1,19 @@
-/* TMDB-API-Wrapper.js -
+/**!
+ * @license TheMovieDB-API-Wrapper.js - A JavaScript library for easily fetching info from TheMovieDataBase API. 
+ * LICENSED UNDER MIT LICENSE
+ * MORE INFO CAN BE FOUND AT https://github.com/MarketingPipeline/TheMovieDB-API-Wrapper.js/
+ */
 
-*/
+/* TO-DO
+For anybody reading this wanting to improve this script. Here are some things that could be improved or added.
+
+- [ ] Improve error handling
+- [ ] More Routes To Search 
+  - [ ] Search TV or Movie by ID
+
+*/ 
+
+
 
 // Regex / Name Parser For Torrents
 import tnp from "https://cdn.skypack.dev/torrent-name-parser@0.6.5";
@@ -93,7 +106,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
                     DEBUGGER(`Found a ID For ${name}`)
                     // ID to find more details
-                    var MovieID = search_results.results[0].id
+                    let MovieID = search_results.results[0].id
 
                     let episode_query = ""
 
@@ -113,7 +126,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                         // Search actor / cast info about query name 
                         fetchDetails(`https://api.themoviedb.org/3/${query_type}/${MovieID}/${cast}?&api_key=${TheMovieDB_Wrapper_APIKey}`).then(function(query_results_actors) {
                             DEBUGGER(`Attempting To Find Actors For ${name}`)
-                            var actor_counter = 0
+                            let actor_counter = 0
                             if (!max_actors) {
                                 // Default Max Actors To Return. 
                                 max_actors = 5
@@ -156,12 +169,12 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                     if (response.ok) {
                         const jsonResponse = await response.json();
                         return jsonResponse
-                    } else {
+                    } else { // API Key Error etc. 
                         const jsonResponse = await response.json();
                         resolve(jsonResponse.status_message)
                     }
                 } catch (error) {
-
+                    // something else went wrong... 
                     resolve(error.message)
                 }
             }
