@@ -1,5 +1,25 @@
 # TheMovieDB-API-Wrapper.js
-A JavaScript library for easily fetching ALL info about movies / tv including (genres & actors) & more via TheMovieDB API. 
+
+<div align="center">
+<a href="https://github.com/MarketingPipeline/Media-Element.js"> <img height="300px" src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"/> </a> 
+</div>  
+    
+<p align="center">
+  <b>A easy to use, pure vanilla JavaScript API wrapper for TheMovieDB</b>
+
+  <br>
+  <small> <b><i>Show your support!</i> </b></small>
+  <br>
+   <a href="https://github.com/MarketingPipeline/Media-Element.js">
+    <img title="Star on GitHub" src="https://img.shields.io/github/stars/MarketingPipeline/Media-Element.js.svg?style=social&label=Star">
+  </a>
+  <a href="https://github.com/MarketingPipeline/Media-Element.js/fork">
+    <img title="Fork on GitHub" src="https://img.shields.io/github/forks/MarketingPipeline/Media-Element.js.svg?style=social&label=Fork">
+  </a>
+   </p>  
+
+
+A JavaScript library for easily fetching ALL info about movies / tv including (genres & actors) & more via TheMovieDB API. With support for finding media info for torrent names via [Torrent Name Parser](https://github.com/clems6ever/torrent-name-parser).
 
 
 ## Example usage
@@ -28,9 +48,9 @@ You will require a API key from TheMovieDB and to define a variable called <code
 A movie / film query name could look like the following example(s)
 
    
-    Captain Russia
-    Captain Russia (2014)
-    Captain Russia The Summer Soldier (2014) 1080p BrRip x264 - YIFY
+    Captain America
+    Captain America (2014)
+    Captain America The Winter Soldier (2014) 1080p BrRip x264 - YIFY
     
 for more accurate results, a year should be provided in the query. 
 
@@ -50,14 +70,20 @@ When searching up a movie / film - any found media info & actor info  will be re
 	
   // Valid API Key	
  var TheMovieDB_APIKey = "YOUR API KEY HERE"	
+
+// Auto detecting name & year # from Torrent Name
+FetchDataFrom_TheMovieDB("Captain America The Winter Soldier (2014) 1080p BrRip x264 - YIFY", "movie",  2).then(function(search_results) {
+    console.log(search_results)
+  });
+  
 	
 /// Both arrays (Media Info & Actors Info)
-FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("Captain America The Winter Soldier", "movie",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 /// Media Info Only
-FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("8 Mile (2002)", "movie",  2).then(function(search_results) {
     console.log(search_results)[0]
   });  
   
@@ -93,9 +119,9 @@ When searching up a TV show - any found media info & actor info will be returned
 A TV show query name could look like the following example(s)
 
    
-    Captain Russia
-    Captain Russia (2014)
-    Captain Russia The Summer Soldier (2014) 1080p BrRip x264 - YIFY
+    Two and a Half Men
+    Two and a Half Men (2003)
+    Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]
     
 for more accurate results, a year should be provided in the query. 
 
@@ -110,23 +136,23 @@ for more accurate results, a year should be provided in the query.
  var TheMovieDB_APIKey = "YOUR API KEY HERE"		
 	
 // Auto detecting name & year # from Torrent Name
-FetchDataFrom_TheMovieDB("8 Mile 1080p BrRip x264 - YIFY", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]", "movie",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 	
 /// Both arrays (Media Info & Actors Info)
-FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("Two and a Half Men", "tv",  2).then(function(search_results) {
     console.log(search_results)
   });
   
 /// Media Info Only
-FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("Two and a Half Men (2003)", "tv",  2).then(function(search_results) {
     console.log(search_results)[0]
   });  
   
 /// Actor / Cast Info Only
-FetchDataFrom_TheMovieDB("8 Mile", "movie",  2).then(function(search_results) {
+FetchDataFrom_TheMovieDB("Two and a Half Men 2003", "tv",  2).then(function(search_results) {
     console.log(search_results)[1]
   });    
 ```
@@ -189,9 +215,9 @@ You will require a API key from TheMovieDB and to define a variable called <code
 A episode info query could look like the following example(s)
 
    
-    Captain Russia
-    Captain Russia (2014)
-    Captain Russia The Summer Soldier (2014) 1080p BrRip x264 - YIFY
+    Two and a Half Men
+    Two and a Half Men (2003)
+    Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]
     
 <b>Note</b>: Season and Episode numbers will try to be auto-detected from query, tho they can be provided manually as parameters. If no season or episode name is found or provided, an error message will occur.  	
 	
