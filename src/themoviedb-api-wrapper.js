@@ -35,7 +35,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
     return new Promise(resolve => {
 
-        if (TheMovieDB_Wrapper_APIKey === 'undefined') {
+        if (window.TheMovieDB_Wrapper_APIKey === 'undefined') {
             return console.log("Error - TheMovieDB API Key Not Provided")
         }
         if (!query) {
