@@ -28,6 +28,8 @@ function DEBUGGER(msg) {
     }
 }
 
+let TheMovieDB_Wrapper_APIKey = null;
+
 // The API Wrapper
 function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
     // if query was provided 
@@ -35,7 +37,7 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
 
     return new Promise(resolve => {
 
-        if (window.TheMovieDB_Wrapper_APIKey === 'undefined') {
+        if (TheMovieDB_Wrapper_APIKey === null) {
             return console.log("Error - TheMovieDB API Key Not Provided")
         }
         if (!query) {
@@ -182,8 +184,14 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
     });
 }
 
+
+// Function to set API key
+export function tmdb_api_key(key) {
+  TheMovieDB_Wrapper_APIKey = key
+}
+
 // Function to call the wrapper
-export async function FetchDataFromTheMovieDB(query, query_type, max_actors, season, episode) {
+export async function fetch_tmdb_info(query, query_type, max_actors, season, episode) {
     const Media_Info = await TheMovieDB_Wrapper(query, query_type, max_actors, season, episode);
     return Media_Info
 
