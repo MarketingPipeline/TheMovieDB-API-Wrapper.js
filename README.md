@@ -38,10 +38,17 @@ You can view a demo of the API wrapper in use [here.](https://marketingpipeline.
  <br>
 <details><summary>How to use <b>TheMovieDB-API-Wrapper.js</b>:</summary>
  <br>		
- 
+
+
 	
+<br>
+
+> :warning: **Error Handling**: Any errors that occur will be returned inside a JSON key named <code>tmdb_api_error</code>
+
 <br>	 
-<br>	 
+
+
+
 	
 <details><summary>How to search up <b>Movie</b> info:</summary>
 	
