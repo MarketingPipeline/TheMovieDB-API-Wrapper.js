@@ -6,11 +6,14 @@
 
 /* TO-DO
 For anybody reading this wanting to improve this script. Here are some things that could be improved or added.
+
 - [ ] More Routes To Search 
   - [ ] Search TV or Movie by ID
 - [ ] Clean variable names etc..   
 - [ ] Make a class for this.. 
+
 */ 
+
 
 
 // Regex / Name Parser For Torrents
@@ -54,6 +57,13 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
           DEBUGGER("Error -  Query Type Not Provided")
           return resolve(setErrorMsg("Query Type Not Provided"))
         }
+      
+      
+      // Valid query types 
+       if (query_type.toLowerCase() != "movie" && query_type.toLowerCase() !="tv"  && query_type.toLowerCase() !="reviews"  && query_type.toLowerCase() !="similar"  && query_type.toLowerCase() !="episode"  && query_type.toLowerCase() !="actor"  && query_type.toLowerCase() !="collection"){
+         DEBUGGER("Error -  Query Type Not Valid")
+          return resolve(setErrorMsg("Query Type Not Valid"))
+       }
 
         if (query != undefined) {
             // parse results
@@ -65,15 +75,49 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                 year = `&year=${tnp(query).year}`
             }
 
-            let episode_search = false
+            let episode_search = false;
+            
+            let similar_search = false;
 
+            let review_search = false;
+          
             if (query_type.toLowerCase() === "actor") {
                 query_type = "person"
             }
 
             if (query_type.toLowerCase() === "collection") {
-                query_type = query_type
+                query_type = "collection"
             }
+          if (query_type.toLowerCase() === "similar") {
+            if(!max_actors){
+              DEBUGGER("Error - Query Type Is Not Provided")
+              return resolve(setErrorMsg("Query Type Is Not Provided"))
+            } else{ 
+              if (max_actors.toLowerCase() != "tv" && max_actors.toLowerCase() != "movie"){
+                 DEBUGGER("Error - Query Type Is Not Provided, Must Be TV or Movie")
+              return resolve(setErrorMsg("Query Type Is Not Valid"))
+              }
+                query_type = max_actors
+             similar_search = true;
+         
+            }
+          }
+          
+          if (query_type.toLowerCase() === "reviews"){
+              if(!max_actors){
+              DEBUGGER("Error - Query Type Is Not Provided")
+              return resolve(setErrorMsg("Query Type Is Not Provided"))
+            } else{ 
+                if (max_actors.toLowerCase() != "movie" && max_actors.toLowerCase() !="tv"){
+                 DEBUGGER("Error - Query Type Is Not Provided, Must Be TV or Movie")
+              return resolve(setErrorMsg("Query Type Is Not Valid"))
+              } 
+                query_type = max_actors
+             review_search = true;
+            }
+            
+          }
+          
             if (query_type.toLowerCase() === "episode") {
                 query_type = "tv"
                 episode_search = true
@@ -128,15 +172,40 @@ function TheMovieDB_Wrapper(query, query_type, max_actors, season, episode) {
                     if (episode_search === true) {
                         episode_query = `/season/${season}/episode/${episode}`
                     }
+                  
+                    if (similar_search === true){
+                      episode_query = `/similar`
+                    }
 
+                  if (review_search === true){
+                    episode_query = `/reviews`
+                  }
                     let fetchMediaInfoURL = `https://api.themoviedb.org/3/${query_type}/${MovieID}${episode_query}?&api_key=${TheMovieDB_Wrapper_APIKey}`
 
                     // Search extra info about query name (endpoint includes genres etc..) 
                     fetchDetails(fetchMediaInfoURL).then(function(query_results) {
-
+console.log(fetchMediaInfoURL)
                         DEBUGGER(`Success - Found info for ${name} using ID: ${MovieID}`)
 
                         Movie_JSON.push(query_results)
+                      
+                      if (similar_search === true) {
+                         if (query_results.total_results === 0) {
+                    DEBUGGER(`No results found for ${query}`)
+                    return resolve(setErrorMsg("No results found"))
+                         }
+                        return resolve(query_results)
+                        
+                      }
+                      
+                      if (review_search  === true) {
+                         if (query_results.total_results === 0) {
+                    DEBUGGER(`No results found for ${query}`)
+                    return resolve(setErrorMsg("No results found"))
+                         }
+                   return resolve(query_results)  
+                        
+                      }
                         
                         // Search actor / cast info about query name 
                         fetchDetails(`https://api.themoviedb.org/3/${query_type}/${MovieID}/${cast}?&api_key=${TheMovieDB_Wrapper_APIKey}`).then(function(query_results_actors) {
