@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "name": "@MarketingPipeline/TheMovieDB-API-Wrapper.js",
+  "description": "A pure vanilla JavaScript library for EASILY fetching data from TheMovieDB",
+  "license": "MIT",
+  "main": "./dist/themoviedb-api-wrapper.js",
+  "author": {
+    "name": "MarketingPipeline",
+    "url": "https://github.com/MarketingPipeline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarketingPipeline/TheMovieDB-API-Wrapper.js.git"
+  }
+}
