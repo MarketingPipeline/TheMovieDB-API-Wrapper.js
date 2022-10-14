@@ -1,6 +1,7 @@
 {
   "type": "module",
   "name": "@MarketingPipeline/TheMovieDB-API-Wrapper.js",
+  "version": "1.0.0",
   "description": "A pure vanilla JavaScript library for EASILY fetching data from TheMovieDB",
   "license": "MIT",
   "main": "./dist/themoviedb-api-wrapper.min.js",
