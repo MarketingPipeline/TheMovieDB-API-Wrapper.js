@@ -1,7 +1,9 @@
 # TheMovieDB-API-Wrapper.js
 
 <div align="center">
-<a href="https://github.com/MarketingPipeline/TheMovieDB-API-Wrapper.js"> <img height="300px" src="https://user-images.githubusercontent.com/86180097/177226706-2948933e-d3fc-4940-9f62-fab83bea48fe.png"/> </a> 
+<a href="https://github.com/MarketingPipeline/TheMovieDB-API-Wrapper.js"> 
+<img height=350 alt="Repo Banner for TheMovieDB-API-Wrapper.js" src="https://capsule-render.vercel.app/api?type=waving&color=539bf5&height=300&section=header&text=TheMovieDB-API-Wrapper.js&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Easily%20fetch%20info%20from%20TheMovieDB.org!&descAlignY=60&descAlign=50"></img></a>
+
 </div>  
     
 <p align="center">
@@ -26,7 +28,8 @@ A JavaScript library for easily fetching ALL info about movies / tv including (g
 
 ## Example usage
 
-You can view a demo of the API wrapper in use [here.](https://marketingpipeline.github.io/TheMovieDB-API-Wrapper.js/demo)
+<!---You can view a demo of the API wrapper in use [here.](https://marketingpipeline.github.io/TheMovieDB-API-Wrapper.js/demo)-
+-->
 
 
 
@@ -657,11 +660,11 @@ fetch_tmdb_info("Fast And Furious", "similar",  "movie").then(function(search_re
 
 ### HTML script
 
-    <script type="module" src="https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js" defer></script> 
+    <script type="module" src="https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/dist/themoviedb-api-wrapper.min.js" defer></script> 
 
 ### Import 
 
-    import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js'
+    import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/dist/themoviedb-api-wrapper.min.js'
     
 </details>    
 
