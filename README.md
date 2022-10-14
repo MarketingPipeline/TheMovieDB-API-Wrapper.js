@@ -107,6 +107,42 @@ fetch_tmdb_info("8 Mile", "movie",  2).then(function(search_results) {
 ```
 
 
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The movie you would to search info for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>max_actors</td>
+<td>The maximum number of actor / cast members to return data for</td>
+<td><code>5</code></td>
+<td>No</td>
+</tr>
+	
+
+
+
+</table>
 
 	
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
@@ -173,6 +209,44 @@ fetch_tmdb_info("Two and a Half Men 2003", "tv",  2).then(function(search_result
 ```
 
 
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The TV show you would to search info for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>max_actors</td>
+<td>The maximum number of actor / cast members to return data for</td>
+<td><code>5</code></td>
+<td>No</td>
+</tr>
+	
+
+	
+
+
+</table>
+
 
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
@@ -206,6 +280,38 @@ fetch_tmdb_info("Fast And Furious", "collection",  2).then(function(search_resul
   });
 ```
 
+
+
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The movie collection you would to search info for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+	
+
+
+</table>
 
  <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
 </details>
@@ -257,43 +363,6 @@ fetch_tmdb_info("Two and a Half Men", "episode",  2, 5, 2).then(function(search_
 ```
 
 
-
- <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
-</details>
-
-
- <br>		
- 
-	
-<br>	 
-<br>	 
-	
-<details><summary>How to search <b>Actor</b> info:</summary>
-	
-<br>	
-	
-You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
-	
-### Usage
-	 
-
-> Paramaters (Query [REQUIRED], Type [REQUIRED])
-
-```js
-/// API WRAPPER USAGE EXAMPLE	
-import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
-  // Valid API Key	
- tmdb_api_key("YOUR API KEY HERE")	
-fetch_tmdb_info("Eminem", "actor").then(function(search_results) {
-  console.log(search_results)
-  });
-```
-
-
-
- <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
-</details>
-
 ####                                                                                                                    Options
 
 
@@ -306,7 +375,7 @@ fetch_tmdb_info("Eminem", "actor").then(function(search_results) {
 </tr>
 <tr>
 <td>query</td>
-<td>The movie, TV show, actor or collection you would to search info for</td>
+<td>The TV show you would to search info for</td>
 <td><code>undefined</code></td>
 <td>Yes</td>
 </tr>
@@ -344,6 +413,237 @@ fetch_tmdb_info("Eminem", "actor").then(function(search_results) {
 
 
 </table>
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+ <br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to search <b>Actor</b> info:</summary>
+	
+<br>	
+	
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
+	
+### Usage
+	 
+
+> Paramaters (Query [REQUIRED], Type [REQUIRED])
+
+```js
+/// API WRAPPER USAGE EXAMPLE	
+import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  // Valid API Key	
+ tmdb_api_key("YOUR API KEY HERE")	
+fetch_tmdb_info("Eminem", "actor").then(function(search_results) {
+  console.log(search_results)
+  });
+```
+
+
+
+
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The actor you would to search info for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode, Similar, Reviews</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+</table>
+
+
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+<br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to search <b>TV / Movie</b> reviews:</summary>
+
+<br>		
+	
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
+	
+### Usage
+	 
+A query name could look like the following example(s)
+
+   
+    Two and a Half Men
+    8 Mile (2003)
+    Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]
+    
+for more accurate results, a year should be provided in the query. 
+
+
+> Paramaters (Query [REQUIRED], Type [REQUIRED], Query Type [Required])
+
+
+```js
+  /// API WRAPPER USAGE EXAMPLE		
+  import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  // Valid API Key	
+ tmdb_api_key("YOUR API KEY HERE")		
+fetch_tmdb_info("Fast And Furious", "reviews",  "movie").then(function(search_results) {
+  console.log(search_results)
+  });
+```
+
+
+
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The movie or TV show you would like to search reviews for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode, Similar, Reviews</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>query_type</td>
+              <td>Type of query to search reviews for <code>TV or Movie</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+	
+
+
+</table>
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
+<br>		
+ 
+	
+<br>	 
+<br>	 
+	
+<details><summary>How to search <b>Similar</b> movies / tv shows:</summary>
+
+<br>		
+	
+You will require a API key from TheMovieDB and need to set your API key using <code>tmdb_api_key("YOUR API KEY")</code> with your valid API key
+	
+### Usage
+	 
+A query name could look like the following example(s)
+
+   
+    Two and a Half Men
+    8 Mile (2003)
+    Two.and.a.Half.Men.S05E02.720p.HDTV.x264-KILLERS[rartv]
+    
+for more accurate results, a year should be provided in the query. 
+	 
+
+> Paramaters (Query [REQUIRED], Type [REQUIRED], Query Type [Required])
+
+
+```js
+  /// API WRAPPER USAGE EXAMPLE		
+  import {fetch_tmdb_info, tmdb_api_key} from 'https://cdn.jsdelivr.net/gh/MarketingPipeline/TheMovieDB-API-Wrapper.js/src/themoviedb-api-wrapper.js' 
+  // Valid API Key	
+ tmdb_api_key("YOUR API KEY HERE")		
+fetch_tmdb_info("Fast And Furious", "similar",  "movie").then(function(search_results) {
+  console.log(search_results)
+  });
+```
+
+
+
+####                                                                                                                    Options
+
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Meaning</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>query</td>
+<td>The movie, TV show or collection you would to similar info for</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>type</td>
+              <td>Type of query to search details for - options:<code>Movie, TV, Actor, Collection, Episode, Similar, Reviews</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+
+
+<tr>
+<td>query_type</td>
+              <td>Type of query to search similar results for <code>TV or Movie</code>.</td>
+<td><code>undefined</code></td>
+<td>Yes</td>
+</tr>
+	
+
+
+</table>
+
+ <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	 <br>	
+</details>
+
+
 
 <br> <br> <br> <br> <br> <br> <br> <br> <br>
 	
