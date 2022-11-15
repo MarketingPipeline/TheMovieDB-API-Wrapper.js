@@ -7,10 +7,13 @@
 /* TO-DO
 For anybody reading this wanting to improve this script. Here are some things that could be improved or added.
 
-- [ ] More Routes To Search 
+- [ ] More Routes To Search - see https://developers.themoviedb.org/3/getting-started/introduction
+   - useful routes would be getting all extra backdrops
   - [ ] Search TV or Movie by ID
-- [ ] Clean variable names etc..   
-- [ ] Make a class for this.. 
+  
+- [ ] Improve / clean variable names etc..   
+- [ ] Possiblly make a class for this..? 
+- [ ] Clean junky code - remove usage of variables for review search etc... 
 
 */ 
 
@@ -33,9 +36,15 @@ let TheMovieDB_Wrapper_APIKey = null;
 
 // The API Wrapper
 function TheMovieDB_Wrapper(arg1, arg1_type, arg3, arg4, arg5) {
-    // if arg1 was provided 
-console.log(arg1_type)
-
+    // These arguments are required to be lower case
+  if (arg1_type){
+    arg1_type = arg1_type.toLowerCase()
+  }
+  if (arg3){
+    arg3 = arg3.toLowerCase()
+  }
+    
+  // if query was provided 
     return new Promise(resolve => {
 
         // function to return error messages 
@@ -59,11 +68,8 @@ console.log(arg1_type)
         }
       
       
-      // Valid arg1 types 
-        
-       // make arg lowercase
-        arg1_type = arg1_type.toLowerCase()
-      
+      // Valid query types 
+     
        if (arg1_type != "movie" && arg1_type !="tv"  && arg1_type !="reviews"  && arg1_type !="similar"  && arg1_type !="episode"  && arg1_type !="actor"  && arg1_type !="collection"  && arg1_type !="recommendations"){
          DEBUGGER("Error -  Query Type Not Valid")
           return resolve(setErrorMsg("Query Type Not Valid"))
@@ -87,30 +93,29 @@ console.log(arg1_type)
 
             let review_search = false;
           
-            if (arg1_type.toLowerCase() === "actor") {
+            if (arg1_type === "actor") {
                 arg1_type = "person"
             }
 
-            if (arg1_type.toLowerCase() === "collection") {
+            if (arg1_type === "collection") {
                 arg1_type = "collection"
             }
-          if (arg1_type.toLowerCase() === "similar" || arg1_type.toLowerCase() === "recommendations") {
-         
+          if (arg1_type === "similar" || arg1_type === "recommendations") {
             if(!arg3){
               DEBUGGER("Error - Query Type Is Not Provided")
               return resolve(setErrorMsg("Query Type Is Not Provided"))
             } else{ 
-              if (arg3.toLowerCase() != "tv" && arg3.toLowerCase() != "movie"){
+              if (arg3 != "tv" && arg3 != "movie"){
                  DEBUGGER("Error - Query Type Is Not Provided, Must Be TV or Movie")
               return resolve(setErrorMsg("Query Type Is Not Valid"))
               }
               
-                if(arg1_type.toLowerCase() == "recommendations"){
+                if(arg1_type == "recommendations"){
              recommendation_search = true;
          
             }
               
-              if(arg1_type.toLowerCase() == "similar"){
+              if(arg1_type == "similar"){
              similar_search = true;
             }  
                 arg1_type = arg3
@@ -121,12 +126,13 @@ console.log(arg1_type)
             }
           }
           
-          if (arg1_type.toLowerCase() === "reviews"){
+          if (arg1_type === "reviews"){
               if(!arg3){
               DEBUGGER("Error - Query Type Is Not Provided")
               return resolve(setErrorMsg("Query Type Is Not Provided"))
             } else{ 
-                if (arg3.toLowerCase() != "movie" && arg3.toLowerCase() !="tv"){
+                arg3 = arg3
+                if (arg3 != "movie" && arg3 !="tv"){
                  DEBUGGER("Error - Query Type Is Not Provided, Must Be TV or Movie")
               return resolve(setErrorMsg("Query Type Is Not Valid"))
               } 
@@ -136,7 +142,7 @@ console.log(arg1_type)
             
           }
           
-            if (arg1_type.toLowerCase() === "episode") {
+            if (arg1_type === "episode") {
                 arg1_type = "tv"
                 episode_search = true
                 if (!arg4) {
@@ -160,11 +166,11 @@ console.log(arg1_type)
             }
 
 
-            DEBUGGER(`Searching for ${name}, Year: ${year}, Type: ${arg1_type}`)
+            DEBUGGER(`Searching for ${name}, Year: ${tnp(arg1).year?`${tnp(arg1).year}`:"No Year Found"}, Type: ${arg1_type}`)
             // End Point To Send Request Too 
             let Movie_JSON = []
             let Actor_JSON = []
-            // Search for arg1 name 
+            // Search for movie / tv show name 
             fetchDetails(`https://api.themoviedb.org/3/search/${arg1_type}?api_key=${TheMovieDB_Wrapper_APIKey}&language=en-US&query=${name}${year}`).then(function(search_results) {
 
                 if (search_results.total_results === 0) {
@@ -173,11 +179,11 @@ console.log(arg1_type)
                 } else {
 
 
-                    if (arg1_type.toLowerCase() === "collection") {
+                    if (arg1_type === "collection") {
                         return resolve(search_results.results)
                     }
 
-                    if (arg1_type.toLowerCase() === "person") {
+                    if (arg1_type === "person") {
                         return resolve(search_results.results)
                     }
 
@@ -197,7 +203,7 @@ console.log(arg1_type)
                   
                      if (recommendation_search === true){
                       fetch_extra_details_endpoint = `/recommendations`
-                      console.log("hello")
+                     
                     }
                   
 
@@ -207,7 +213,7 @@ console.log(arg1_type)
                   }
                     let fetchMediaInfoURL = `https://api.themoviedb.org/3/${arg1_type}/${MovieID}${fetch_extra_details_endpoint}?&api_key=${TheMovieDB_Wrapper_APIKey}`
 
-                    // Search extra info about arg1 name (endpoint includes genres etc..) 
+                    // Search extra info about movie / tv show  name (endpoint such as genres etc..) 
                     fetchDetails(fetchMediaInfoURL).then(function(arg1_results) {
 console.log(fetchMediaInfoURL)
                         DEBUGGER(`Success - Found info for ${name} using ID: ${MovieID}`)
@@ -216,24 +222,30 @@ console.log(fetchMediaInfoURL)
                       
                       if (similar_search === true || recommendation_search === true) {
                          if (arg1_results.total_results === 0) {
+                 if(recommendation_search === true){           
                     DEBUGGER(`No results found for ${arg1}`)
-                    return resolve(setErrorMsg("No results found"))
+                    return resolve(setErrorMsg("No recommended movies found"))
+                 } else{
+                         DEBUGGER(`No results found for ${arg1}`)
+                    return resolve(setErrorMsg("No similar movies found"))
+                 }
+                   
                          }
                         return resolve(arg1_results)
                         
                       }
                       
                       if (review_search  === true) {
-                        console.log(fetchMediaInfoURL)
+      
                          if (arg1_results.total_results === 0) {
-                    DEBUGGER(`No results found for ${arg1}`)
-                    return resolve(setErrorMsg("No results found"))
+                    DEBUGGER(`No reviews found for ${arg1}`)
+                    return resolve(setErrorMsg("No reviews found"))
                          }
                    return resolve(arg1_results)  
                         
                       }
                         
-                        // Search actor / cast info about arg1 name 
+ // Search actor / cast info about movie / tv shpw name 
                         fetchDetails(`https://api.themoviedb.org/3/${arg1_type}/${MovieID}/${cast}?&api_key=${TheMovieDB_Wrapper_APIKey}`).then(function(arg1_results_actors) {
                             DEBUGGER(`Attempting To Find Actors For ${name}`)
                             let actor_counter = 0
@@ -306,10 +318,3 @@ export async function fetch_tmdb_info(arg1, arg1_type, arg3, arg4, arg5) {
     return Media_Info
 
 }
-
-tmdb_api_key("6b4357c41d9c606e4d7ebe2f4a8850ea")
-
-/// Actor / Cast Info Only
-fetch_tmdb_info("Notorious", "recommendations", "movie").then(function(search_results) {
-    console.log(search_results)[1]
-  });    
